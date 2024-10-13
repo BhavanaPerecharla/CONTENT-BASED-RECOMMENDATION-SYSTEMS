@@ -1,37 +1,3 @@
-<?php
-<<<<<<< HEAD
-	if (!empty($_SERVER['HTTPS']) && ('on' == $_SERVER['HTTPS'])) {
-		$uri = 'https://';
-	} else {
-		$uri = 'http://';
-	}
-	$uri .= $_SERVER['HTTP_HOST'];
-	header('Location: '.$uri.'/dashboard/');
-	exit;
-?>
-Something is wrong with the XAMPP installation :-(
-=======
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "Profiles"; // Use your actual database name
-
-// Create connection
-$conn = new mysqli($servername, $username, $password, $dbname);
-
-// Check connection
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
-
-// Search functionality
-$searchQuery = "";
-if (isset($_POST['search'])) {
-    $searchQuery = $_POST['searchQuery'];
-}
-
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -160,7 +126,8 @@ strong {
     </style>
 </head>
 <body>
-    <!-- Sidenav HTML -->
+
+<!-- Sidenav HTML -->
 <div id="mySidenav" class="sidenav">
 <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
         <a href="indexs.php">Home</a>
@@ -169,80 +136,74 @@ strong {
         <a href="clients.html">Clients</a>
         <a href="contact.html">Contact</a>
 </div>
+
 <!-- Open button for sidenav -->
 <span class="open-nav-btn" onclick="openNav()">&#9776; Menu</span>
+
+<!-- Main content of the page -->
+<div id="main-content">
     <div class="container">
         <h1>Movie Database</h1>
 
-   
         <form method="post" action="index.php" class="search-bar" autocomplete="off">
             <input type="text" id="searchQuery" name="searchQuery" placeholder="Search for a movie..." onkeyup="showSuggestions(this.value)">
             <div id="suggestions" class="suggestions-list"></div> <!-- Container for suggestions -->
             <button type="submit" name="search">Search</button>
         </form>
 
-        <!-- Movie Results Container -->
-        <div id="movie-list" class="movie-grid" style="max-height: 800px; overflow-y: auto;">
-            <?php
-            // Query to fetch movies based on search query or display top 10
-            $sql = "SELECT * FROM Movies WHERE MovieName LIKE '%$searchQuery%' ORDER BY Rating DESC LIMIT 10";
-            $result = $conn->query($sql);
-
-            // Display movie listings in grid format
-            if ($result->num_rows > 0) {
-                while ($row = $result->fetch_assoc()) {
-                    echo "
-                    <div class='movie-box'>
-                        <h2>" . htmlspecialchars($row['MovieName']) . " (" . htmlspecialchars($row['YearReleased']) . ")</h2>
-                        <p><strong>Genre: </strong>" . htmlspecialchars($row['Genre']) . "</p>
-                        <p><strong>Rating: </strong>" . htmlspecialchars($row['Rating']) . "</p>
-                        <p><strong>Streaming At: </strong>" . htmlspecialchars($row['StreamingAt']) . "</p>
-                        <a href='movie_details.php?MovieID=" . htmlspecialchars($row['MovieID']) . "'><button>Show More</button></a>
-                    </div>";
-                }
-            } else {
-                echo "<p>No movies found matching the search query.</p>";
-            }
-
-            $conn->close();
-            ?>
+        <div id="movie-list" class="movie-grid" style="max-height: 900px; overflow-y: auto;">
+            <?php include 'movies.php'; ?>
         </div>
-        <div class="back-button">
-            <button onclick="window.history.back()">Back</button>
-        </div>
+
+        <button id="show-more" onclick="loadMoreMovies()">Show More</button>
     </div>
-    <script>
-    function showSuggestions(query) {
-    const suggestionsBox = document.getElementById('suggestions');
-    const movieGrid = document.getElementById('movie-list');
+</div>
+<div class="info-box">
+    <h2>WANT TO GET TO KNOW MORE?</h2>
+    <p>ABOUT YOUR FAVOURITE ARTISTS</p>
+    <button class="open-btn" onclick="location.href='art.php'">CLICK TO FIND OUT</button>
+</div>
 
-    if (query.length === 0) {
-        suggestionsBox.innerHTML = ''; // Clear suggestions when query is empty
-        movieGrid.style.marginTop = '20px'; // Reset the movie grid margin
-        return;
+<script>
+    let offset = 15; // Start loading movies from the 21st
+    function loadMoreMovies() {
+        fetch(`movie_list.php?offset=${offset}`)
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('movie-list').innerHTML += data;
+                offset += 10;
+            });
     }
 
-    // Fetch suggestions from the server
-    fetch(`moviesuggestions.php?query=${encodeURIComponent(query)}`)
-        .then(response => response.text())
-        .then(data => {
-            suggestionsBox.innerHTML = data; // Populate suggestions
+    function showSuggestions(query) {
+        const suggestionsBox = document.getElementById('suggestions');
+        const movieGrid = document.getElementById('movie-list');
 
-            // If suggestions exist, push the movie grid down
-            if (data.trim() !== '') {
-                movieGrid.style.marginTop = suggestionsBox.offsetHeight + 'px';
-            } else {
-                movieGrid.style.marginTop = '20px'; // Reset margin if no suggestions
-            }
-        })
-        .catch(error => console.error('Error fetching suggestions:', error));
-}
+        if (query.length === 0) {
+            suggestionsBox.innerHTML = '';
+            movieGrid.style.marginTop = '20px';
+            return;
+        }
 
+        fetch(`moviesuggestions.php?query=${encodeURIComponent(query)}`)
+            .then(response => response.text())
+            .then(data => {
+                suggestionsBox.innerHTML = data;
+
+                if (data.trim() !== '') {
+                    movieGrid.style.marginTop = suggestionsBox.offsetHeight + 'px';
+                } else {
+                    movieGrid.style.marginTop = '20px';
+                }
+            })
+            .catch(error => console.error('Error fetching suggestions:', error));
+    }
 
     function selectMovie(movieName) {
-        document.getElementById('searchQuery').value = movieName; // Set the selected movie in the input field
-        document.getElementById('suggestions').innerHTML = ''; // Clear suggestions
+        document.getElementById('searchQuery').value = movieName;
+        document.getElementById('suggestions').innerHTML = '';
     }
+
     function openNav() {
         document.getElementById("mySidenav").style.width = "200px"; /* Reduced width */
         document.getElementById("main-content").style.marginLeft = "200px";
@@ -256,4 +217,3 @@ strong {
 
 </body>
 </html>
->>>>>>> 14942d7 (Added film profiles for the content-based recommendation system)

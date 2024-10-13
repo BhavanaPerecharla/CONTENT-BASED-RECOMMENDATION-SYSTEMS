@@ -1,0 +1,201 @@
+/* Global Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    min-height: 100vh;
+    font-family: 'Playfair Display', serif;
+    background: radial-gradient(circle, #FF3CAC, #784BA0, #2B86C5, #43E97B);
+    background-size: 400% 400%;
+    color: #fffdfb;
+    height: 100vh;
+    display: block;
+    line-height: 1.8;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    animation: backgroundShift 15s ease infinite;
+}
+
+/* Animated background gradient shift */
+@keyframes backgroundShift {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+/* Glowing margins for the entire page */
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border: 10px solid rgba(255, 255, 255, 0.6);
+    box-shadow: 0 0 20px 10px rgba(255, 255, 255, 0.8);
+    border-radius: 15px;
+    z-index: -1;
+    animation: borderGlow 5s ease-in-out infinite alternate;
+}
+
+/* Glowing border animation */
+@keyframes borderGlow {
+    0% {
+        box-shadow: 0 0 15px 10px rgba(255, 255, 255, 0.6);
+    }
+    100% {
+        box-shadow: 0 0 30px 20px rgba(255, 255, 255, 1);
+    }
+}
+
+h1 {
+    margin-left: 40px;
+    font-family: 'Lobster', cursive;
+    font-size: 4rem;
+    text-align: left;
+    margin-bottom: 20px;
+    color: #ffe600;
+    position: relative;
+    display: inline-block;
+    padding-bottom: 10px;
+}
+
+h1::after {
+    content: '';
+    margin-bottom: 20px;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 120%;
+    height: 8px;
+    background: linear-gradient(to right, #00FF85, #FF9A00, #FF003D);
+    border-radius: 4px;
+    z-index: -1;
+}
+
+h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 3rem;
+    color: #FFD700;
+    margin-bottom: 15px;
+    animation: fadeIn 1.2s ease-in-out;
+}
+
+/* Glowing text animation */
+@keyframes textGlow {
+    0% {
+        text-shadow: 0 0 10px rgba(255, 255, 0, 0.8), 0 0 20px rgba(255, 204, 0, 0.6);
+    }
+    100% {
+        text-shadow: 0 0 30px rgba(255, 255, 0, 1), 0 0 40px rgba(255, 204, 0, 0.9);
+    }
+}
+
+/* Artist details section with sleek design */
+#artist-details {
+    background: rgba(255, 255, 255, 0.2);
+    padding: 30px;
+    background-clip: padding-box;
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.8), 0 0 30px rgba(255, 165, 0, 0.5);
+    margin-left: 40px;
+    margin-right: 40px;
+    text-align: left;
+    border-radius: 15px;
+    margin-bottom: 40px;
+    box-shadow: 0 0 50px rgba(81, 13, 13, 0.4);
+    backdrop-filter: blur(5px);
+    animation: fadeIn 1.5s ease-out;
+}
+
+#artist-details:hover {
+    box-shadow: 0 0 40px rgba(255, 255, 255, 0.8), 0 0 80px rgba(255, 165, 0, 0.7);
+}
+
+/* Text styling within artist details */
+#artist-details p {
+    font-size: 1.4em;
+    margin-bottom: 15px;
+    line-height: 1.8;
+    color: #f0fffa;
+}
+
+/* Strong text style for labels */
+strong {
+    font-weight: bold;
+    color: #00f7ff; /* Bright cyan for labels */
+}
+
+/* Back button with vibrant hover effect */
+button {
+    background-color: #FF3CAC;
+    color: white;
+    border: 2px solid white;
+    padding: 15px 35px;
+    font-size: 1.2em;
+    text-transform: uppercase;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+    margin-top: 30px;
+    letter-spacing: 1.5px;
+    margin-left: 50px;
+    margin-bottom: 70px;
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.4);
+}
+
+/* Button hover effect */
+button:hover {
+    background-color: #FFD700;
+    color: #FF3CAC;
+    box-shadow: 0 0 30px rgba(255, 255, 255, 0.7);
+    transform: scale(1.1);
+}
+
+/* Button focus effect */
+button:focus {
+    outline: none;
+    box-shadow: 0 0 25px rgba(255, 255, 255, 0.8);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    
+    h1 {
+        font-size: 3rem;
+    }
+
+    h2 {
+        font-size: 2.2rem;
+    }
+
+    p {
+        font-size: 1.2rem;
+    }
+
+    button {
+        font-size: 1.2rem;
+        padding: 12px 24px;
+    }
+}
+
+/* Fade-in effect for artist details */
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
