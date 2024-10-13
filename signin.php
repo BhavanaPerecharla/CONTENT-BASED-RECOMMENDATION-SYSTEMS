@@ -31,7 +31,7 @@ try {
         if (password_verify($password, $hashed_password)) {
             // Set session variable for the user
             $_SESSION['user_email'] = $email; // Store user email in session
-            header("Location: index.html"); // Redirect to homepage or dashboard
+            header("Location: indexs.php"); // Redirect to homepage or dashboard
             exit();
         } else {
             // Redirect back to login page with error message

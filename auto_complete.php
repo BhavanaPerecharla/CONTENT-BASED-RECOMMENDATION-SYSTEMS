@@ -1,52 +1,41 @@
 <?php
-header("Content-Type: application/json");
-header("Access-Control-Allow-Origin: *");
-header("Access-Control-Allow-Methods: GET, POST, OPTIONS");
-header("Access-Control-Allow-Headers: Content-Type, Authorization");
-
 $servername = "localhost";
 $username = "root";
 $password = "";
-$dbname = "Profiles";
-
-error_reporting(E_ALL);
-ini_set('display_errors', 1);
+$dbname = "Profiles"; // Use your actual database name
 
 // Create connection
-$conn = new mysqli($servername, $username, $password, $dbname) or die("Unable to connect");
+$conn = new mysqli($servername, $username, $password, $dbname);
 
 // Check connection
 if ($conn->connect_error) {
-    echo json_encode(['error' => 'Connection failed: ' . $conn->connect_error]);
-    exit();
+    die("Connection failed: " . $conn->connect_error);
 }
 
-// Get the search term from the URL parameter
-$searchTerm = isset($_GET['term']) ? $_GET['term'] : '';
+// Get the search query from the URL
+$query = isset($_GET['query']) ? $_GET['query'] : '';
 
-// Prepare the SQL statement to prevent SQL injection
-$stmt = $conn->prepare("SELECT Name FROM bio WHERE Name LIKE ?");
-if (!$stmt) {
-    echo json_encode(['error' => 'Failed to prepare statement.']);
-    exit();
+if ($query !== '') {
+    // Prepare SQL to search for artist names matching the query
+    $sql = "SELECT Name FROM Bio WHERE Name LIKE ? LIMIT 5";
+    $stmt = $conn->prepare($sql);
+    $searchTerm = "%" . $query . "%";
+    $stmt->bind_param("s", $searchTerm);
+    $stmt->execute();
+    $result = $stmt->get_result();
+
+    if ($result->num_rows > 0) {
+        // Output each matching artist name as a suggestion
+        while ($row = $result->fetch_assoc()) {
+            echo "<li class='suggestion-item' onclick='selectArtist(\"" . htmlspecialchars($row['Name']) . "\")'>" . htmlspecialchars($row['Name']) . "</li>";
+        }
+    } else {
+        // If no matches are found
+        echo "<li class='suggestion-item'>No suggestions found</li>";
+    }
+
+    $stmt->close();
 }
 
-$searchTerm = "%$searchTerm%";
-$stmt->bind_param("s", $searchTerm);
-$stmt->execute();
-
-// Get the result
-$result = $stmt->get_result();
-$suggestions = [];
-
-while ($row = $result->fetch_assoc()) {
-    $suggestions[] = $row['Name'];
-}
-
-// Return the suggestions as a JSON array
-echo json_encode($suggestions);
-
-// Close the statement and connection
-$stmt->close();
 $conn->close();
-
+?>
