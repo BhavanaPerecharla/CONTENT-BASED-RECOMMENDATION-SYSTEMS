@@ -12,10 +12,25 @@ Forgot Password and Password Reset Pages
 <img width="1280" alt="Screenshot 2024-09-29 at 1 42 18 PM" src="https://github.com/user-attachments/assets/f4c18d51-86e9-4619-9c00-f4ecc27f0131">
 <img width="1280" alt="Screenshot 2024-09-29 at 1 42 29 PM" src="https://github.com/user-attachments/assets/0dd6dea9-e4a3-49c7-9907-c93ef0129a50">
 
+Movie Details:
+<img width="1280" alt="Screenshot 2024-10-13 at 11 36 17 PM" src="https://github.com/user-attachments/assets/1434ee1e-c882-46a9-9eeb-24b7f3475f6f">
+<img width="1280" alt="Screenshot 2024-10-13 at 11 36 27 PM" src="https://github.com/user-attachments/assets/cc016f76-e3b4-492c-b17c-8ecf03f4154c">
+<img width="1280" alt="Screenshot 2024-10-13 at 11 36 36 PM" src="https://github.com/user-attachments/assets/bf00eb17-b710-4f59-afef-7635b5f704b5">
+<img width="1280" alt="Screenshot 2024-10-13 at 11 36 50 PM" src="https://github.com/user-attachments/assets/1f722f6e-733f-4b1a-97b0-533fd4744f36">
+<img width="1280" alt="Screenshot 2024-10-13 at 11 37 11 PM" src="https://github.com/user-attachments/assets/634cd40a-8508-4eed-b5ab-241202973480">
+
 Film Profiles: Details of Actors, Famous Personalities, Directors, and Producers
-
-<img width="1280" alt="Screenshot 2024-10-13 at 11 37 53 PM" src="https://github.com/user-attachments/assets/b90f1524-24fe-45d4-9839-ad835d5efda2">
-<img width="1280" alt="Screenshot 2024-10-13 at 11 37 43 PM" src="https://github.com/user-attachments/assets/ad0554eb-50b4-4b03-aa53-91b195d89d30">
-<img width="1280" alt="Screenshot 2024-10-13 at 11 37 35 PM" src="https://github.com/user-attachments/assets/1901ba0f-2c4b-4b5b-9771-30f7ad4b7ee3">
 <img width="1280" alt="Screenshot 2024-10-13 at 11 37 24 PM" src="https://github.com/user-attachments/assets/cd497c91-dac1-4b99-8acb-eecae437e8a6">
+<img width="1280" alt="Screenshot 2024-10-13 at 11 37 35 PM" src="https://github.com/user-attachments/assets/1901ba0f-2c4b-4b5b-9771-30f7ad4b7ee3">
+<img width="1280" alt="Screenshot 2024-10-13 at 11 37 43 PM" src="https://github.com/user-attachments/assets/ad0554eb-50b4-4b03-aa53-91b195d89d30">
+<img width="1280" alt="Screenshot 2024-10-13 at 11 37 53 PM" src="https://github.com/user-attachments/assets/b90f1524-24fe-45d4-9839-ad835d5efda2">
 
+Menu:
+<img width="1280" alt="Screenshot 2024-10-13 at 11 37 59 PM" src="https://github.com/user-attachments/assets/3c6ec344-22c8-45f4-bb66-16baa5379bec">
+
+
+<img width="706" alt="Screenshot 2024-10-13 at 11 39 18 PM" src="https://github.com/user-attachments/assets/9dea1448-4118-472d-9a4b-073c5b867f2b">
+<img width="706" alt="Screenshot 2024-10-13 at 11 39 10 PM" src="https://github.com/user-attachments/assets/452548c8-5c59-4ace-bc3a-7781bfc280c4">
+<img width="706" alt="Screenshot 2024-10-13 at 11 38 57 PM" src="https://github.com/user-attachments/assets/bda967cd-1790-4501-9e44-6de77edd5e86">
+<img width="706" alt="Screenshot 2024-10-13 at 11 38 47 PM" src="https://github.com/user-attachments/assets/70ad6d07-988c-4fd9-9c9f-caaa9e681041">
+<img width="706" alt="Screenshot 2024-10-13 at 11 38 38 PM" src="https://github.com/user-attachments/assets/10d0fe0c-dd35-460b-a9f3-1db282aab472">
