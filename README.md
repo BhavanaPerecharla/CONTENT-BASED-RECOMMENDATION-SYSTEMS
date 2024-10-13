@@ -28,9 +28,9 @@ Film Profiles: Details of Actors, Famous Personalities, Directors, and Producers
 Menu:
 <img width="1280" alt="Screenshot 2024-10-13 at 11 37 59 PM" src="https://github.com/user-attachments/assets/3c6ec344-22c8-45f4-bb66-16baa5379bec">
 
+<img width="706" alt="Screenshot 2024-10-13 at 11 38 38 PM" src="https://github.com/user-attachments/assets/accc2a4b-da17-4420-8ca0-558b9ac6c8a3">
 
-<img width="706" alt="Screenshot 2024-10-13 at 11 39 18 PM" src="https://github.com/user-attachments/assets/9dea1448-4118-472d-9a4b-073c5b867f2b">
-<img width="706" alt="Screenshot 2024-10-13 at 11 39 10 PM" src="https://github.com/user-attachments/assets/452548c8-5c59-4ace-bc3a-7781bfc280c4">
-<img width="706" alt="Screenshot 2024-10-13 at 11 38 57 PM" src="https://github.com/user-attachments/assets/bda967cd-1790-4501-9e44-6de77edd5e86">
-<img width="706" alt="Screenshot 2024-10-13 at 11 38 47 PM" src="https://github.com/user-attachments/assets/70ad6d07-988c-4fd9-9c9f-caaa9e681041">
-<img width="706" alt="Screenshot 2024-10-13 at 11 38 38 PM" src="https://github.com/user-attachments/assets/10d0fe0c-dd35-460b-a9f3-1db282aab472">
+<img width="706" alt="Screenshot 2024-10-13 at 11 38 47 PM" src="https://github.com/user-attachments/assets/843fdd42-8caa-4f26-a3cc-900667a5691c">
+<img width="706" alt="Screenshot 2024-10-13 at 11 38 57 PM" src="https://github.com/user-attachments/assets/d6a50652-bd34-4653-87b1-f0728013f7e4">
+<img width="706" alt="Screenshot 2024-10-13 at 11 39 10 PM" src="https://github.com/user-attachments/assets/5012313b-ae59-4155-9c7e-57c6ff9e026f">
+<img width="706" alt="Screenshot 2024-10-13 at 11 39 18 PM" src="https://github.com/user-attachments/assets/a2c22ada-002b-4eb1-8029-210c13ba9d14">
