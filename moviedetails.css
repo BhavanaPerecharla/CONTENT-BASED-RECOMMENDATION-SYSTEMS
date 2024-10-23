@@ -1,0 +1,189 @@
+/* Global Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+body {
+    font-family: 'Times New Roman', serif;
+    background-size: 400% 400%;
+    animation: backgroundShift 15s ease infinite;
+    background: radial-gradient(circle, #FF3CAC, #784BA0, #2B86C5, #43E97B);
+    color: #333;
+    padding: 50px;
+    min-height: 100vh;
+    line-height: 1.8;
+    background-size: 400% 400%;
+    display: block;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Glowing margins for the entire page */
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border: 10px solid rgba(255, 255, 255, 0.6);
+    box-shadow: 0 0 20px 10px rgba(255, 255, 255, 0.8);
+    border-radius: 15px;
+    z-index: -1;
+    animation: borderGlow 5s ease-in-out infinite alternate;
+}
+h1 {
+    font-family: 'Lobster', cursive;
+    font-size: 4rem;
+    text-align: left;
+    margin-bottom: 20px;
+    color: #19ec4aef;
+    position: relative;
+    display: inline-block;
+    padding-bottom: 10px;
+}
+
+h1::after {
+    content: '';
+    margin-bottom: 20px;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 120%;
+    height: 8px;
+    background: linear-gradient(to right, #01a79c, #ffb6c1, #4682b4);
+    border-radius: 4px;
+    z-index: -1;
+}
+
+
+h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 3rem;
+    color: #03f668;
+    margin-bottom: 15px;
+    animation: fadeIn 1.2s ease-in-out;
+}
+
+/* Paragraph Styles */
+p {
+    font-family: 'Inter';
+    font-size: 1.5rem;
+    line-height: 1.8;
+    margin-bottom: 15px;
+    color: #f8f9fa;
+    letter-spacing: 1px;
+    text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.2);
+    animation: fadeInUp 1.2s ease-in-out;
+}
+
+/* Glowing Margins */
+#movie-details {
+    background: rgba(255, 255, 255, 0.2);
+    padding: 20px;
+    border: 5px solid transparent;
+    background-clip: padding-box;
+    border-image-slice: 1;
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.8), 0 0 30px rgba(255, 165, 0, 0.5);
+    margin-bottom: 40px;
+    backdrop-filter: blur(5px);
+    transition: box-shadow 0.5s ease-in-out;
+    animation: fadeIn 1.5s ease-out;
+}
+
+#movie-details:hover {
+    box-shadow: 0 0 40px rgba(255, 255, 255, 0.8), 0 0 80px rgba(255, 165, 0, 0.7);
+}
+
+
+/* Button Styles */
+button {
+    margin-top: 30px;
+    font-size: 1.5rem;
+    padding: 15px 30px;
+    background-color: #e74c3c;
+    color: white;
+    text-transform: uppercase;
+    border: none;
+    border-radius: 50px;
+    border: 2px solid white;
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.4);
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+    transition: background-color 0.4s ease, transform 0.3s ease;
+}
+
+button:hover {
+    background-color: #c0392b;
+    transform: scale(1.05);
+    box-shadow: 0 4px 12px rgba(192, 57, 43, 0.3);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    
+    h1 {
+        font-size: 3rem;
+    }
+
+    h2 {
+        font-size: 2.2rem;
+    }
+
+    p {
+        font-size: 1.2rem;
+    }
+
+    button {
+        font-size: 1.2rem;
+        padding: 12px 24px;
+    }
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Animated background gradient shift */
+@keyframes backgroundShift {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+/* Glowing border animation */
+@keyframes borderGlow {
+    0% {
+        box-shadow: 0 0 15px 10px rgba(255, 255, 255, 0.6);
+    }
+    100% {
+        box-shadow: 0 0 30px 20px rgba(255, 255, 255, 1);
+    }
+}
+
+/* Glowing text animation */
+@keyframes textGlow {
+    0% {
+        text-shadow: 0 0 10px rgba(255, 255, 0, 0.8), 0 0 20px rgba(255, 204, 0, 0.6);
+    }
+    100% {
+        text-shadow: 0 0 30px rgba(255, 255, 0, 1), 0 0 40px rgba(255, 204, 0, 0.9);
+    }
+}

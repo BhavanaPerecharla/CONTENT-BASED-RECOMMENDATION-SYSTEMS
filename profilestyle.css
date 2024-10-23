@@ -1,0 +1,266 @@
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Playfair+Display:wght@400;600&family=Raleway:wght@300;400;600&display=swap');
+
+body {
+    font-family: 'Roboto', sans-serif;
+    background: linear-gradient(120deg, #f6d365, #fda085); /* Gradient background */
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+.container {
+    margin-top: 40px;
+    width: 90%;
+    max-width: 1000px;
+    margin: 20px auto;
+    text-align: center;
+    background: #ffffff;
+    padding: 30px;
+    height: 1200px;
+    border-radius: 10px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+.back-button {
+    margin-top: 55px;
+}
+h1 {
+    color: #333;
+    font-weight: 700;
+    margin-bottom: 20px;
+    font-size: 2.8rem;
+    font-family: 'Lobster', cursive; /* Decorative font for heading */
+}
+
+.search-bar {
+    display: flex;
+    position: relative;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+input {
+    padding: 12px;
+    width: 60%;
+    border: 2px solid #333;
+    border-radius: 25px;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+input:focus {
+    border-color: #fda085;
+    outline: none;
+}
+
+button {
+    padding: 12px 25px;
+    background-color: rgba(253, 29, 29, 1);
+    color: white;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    font-size: 1rem;
+    margin-left: 10px;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+button:hover {
+    background-color: #f39c12;
+    transform: translateY(-2px);
+}
+
+.profile-grid {
+    margin-top: 50px;
+    padding: 20px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* 3 columns */
+    gap: 20px;
+    border-radius: 12px;
+    box-shadow: 0 0 20px rgba(207, 0, 0, 0.5), 0 0 40px rgba(131, 58, 180, 0.5), 0 0 60px rgba(209, 11, 224, 0.5);
+    transition: box-shadow 0.5s ease, transform 0.5s ease;
+    animation: glowingBorders 2s infinite alternate;
+}
+
+.profile-box {
+    background: linear-gradient(80deg, rgb(98, 2, 2) 0%, rgb(156, 44, 44) 50%, rgba(131, 58, 180, 1) 100%);
+    border-radius: 12px;
+    border: 2px solid rgba(255, 255, 255, 0.6);
+    padding: 20px;
+    margin-top: 40px;
+    color: white; 
+    font-weight: 400; 
+    letter-spacing: 0.5px;
+    font-family: 'Lobster', cursive; /* Stylish font */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    margin: 10px; /* This adds space around each profile box */
+}
+
+.profile-box:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+    border-color: rgba(253, 29, 29, 1);
+}
+
+.suggestions-list {
+    border: 1px solid #ddd;
+    max-height: 150px;
+    overflow-y: auto;
+    margin-left:110px;
+    background-color: white;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    position:absolute;
+    width: 100%;
+    top: 100%; /* Adjust this to position the suggestion box below the input field */
+    left: 0;
+    width: 60%;
+    z-index: 999;
+    display: none;
+}
+
+.suggestion-item {
+    padding: 10px;
+    cursor: pointer;
+    border-bottom: 1px solid #ddd;
+}
+
+.suggestion-item:hover {
+    background-color: #f0f0f0;
+}
+
+#show-more {
+    margin-top: 20px;
+    padding: 10px 20px;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+#show-more:hover {
+    background-color: #218838;
+} 
+
+@keyframes glowingBorders {
+    0% {
+        box-shadow: 0 0 20px rgba(6, 163, 50, 0.5), 0 0 40px rgba(131, 58, 180, 0.5), 0 0 60px rgba(29, 253, 242, 0.5);
+    }
+    100% {
+        box-shadow: 0 0 30px rgba(253, 29, 29, 0.8), 0 0 60px rgba(131, 58, 180, 0.8), 0 0 80px rgba(29, 253, 242, 0.8);
+    }
+}
+
+.profile-grid:hover {
+    transform: translateY(-5px); /* Adds a slight lift animation */
+    box-shadow: 0 0 40px rgba(253, 29, 29, 0.7), 0 0 80px rgba(131, 58, 180, 0.7), 0 0 100px rgba(29, 253, 242, 0.7);
+}
+
+/* Responsive Design */
+@media screen and (max-width: 768px) {
+    .profile-grid {
+        grid-template-columns: 1fr; /* 1 profile per row for small screens */
+    }
+
+    .container {
+        width: 95%;
+        padding: 20px;
+    }
+
+    h1 {
+        font-size: 2.2rem;
+    }
+
+    input {
+        width: 80%;
+    }
+
+    button {
+        padding: 10px 20px;
+    }
+}
+
+.search-bar:hover .suggestions-list,
+input:focus + .suggestions-list {
+    display: block; /* Show suggestions */
+}
+
+.info-box {
+    position: fixed;
+    top: 50%;  /* Vertically centers the box */
+    right: 20px;  /* Positions the box on the right side */
+    transform: translateY(-50%);  /* Centers the box vertically */
+    width: 250px;
+    padding: 20px;
+    background: linear-gradient(135deg, #058de1c0, #feb47b); /* Gradient background */
+    color: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(247, 60, 8, 0.82); /* Subtle shadow */
+    font-family: 'Lobster', cursive; /* Lobster font for the text */
+    animation: fadeInSlide 1s ease-in-out;
+    margin: 20px;
+}
+
+/* Animation for the box entrance */
+@keyframes fadeInSlide {
+    0% {
+        opacity: 0;
+        transform: translateX(300px); /* Slide-in from the right */
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(-50%);
+    }
+}
+
+.info-box h2 {
+    font-size: 35px;
+    margin: 0 0 15px;
+    text-align: center;
+    font-family: 'Candara', Calibri, sans-serif;
+}
+
+.info-box p {
+    font-size: 23px;
+    margin: 0 0 20px;
+    text-align: center;
+    font-family: 'Roboto', sans-serif;
+}
+
+/* Button styles */
+.info-box .open-btn {
+    display: block;
+    text-align: center;
+    padding: 10px 20px;
+    background-color: #f00870b9;
+    border: none;
+    color: white;
+    font-size: 16px;
+    font-family: 'Roboto', sans-serif; /* Roboto font for the button */
+    border-radius: 50px;
+    cursor: pointer;
+    transition: background 0.4s ease, transform 0.3s ease;
+    box-shadow: 0 4px 10px rgba(210, 18, 18, 0.963); /* Add shadow to the button */
+}
+
+/* Button hover effects */
+.info-box .open-btn:hover {
+    background-color: #1a0771;
+    transform: scale(1.1); /* Slight scale effect */
+}
+
+.info-box .open-btn:hover {
+    background-color: #0bd6fff4;
+    transform: scale(1.1); /* Slight scale effect */
+}
+
+/* Margins and spacing */
+.info-box {
+    margin: 20px;
+    padding: 15px;
+}
