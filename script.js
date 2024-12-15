@@ -1,111 +1,121 @@
-document.getElementById('searchInput').addEventListener('input', function() {
-    const searchTerm = this.value;
-    if (searchTerm.length > 0) {
-        fetchSuggestions(searchTerm);
-    } else {
-        clearSuggestions();
-    }
-});
+const reviewForm = document.getElementById('reviewForm');
+const reviewInput = document.getElementById('reviewInput');
+const reviewFeed = document.getElementById('reviewFeed');
 
-document.getElementById('searchButton').addEventListener('click', function() {
-    const artistName = document.getElementById('searchInput').value;
-    fetchProfile(artistName);
-});
+let sentimentData = {
+    positive: 0,
+    negative: 0,
+    neutral: 0,
+    reviews: []
+};
 
-function fetchSuggestions(term) {
-    const xhr = new XMLHttpRequest();
-    xhr.open('GET', `auto_complete.php?term=${encodeURIComponent(term)}`, true);
-    xhr.onload = function() {
-        if (this.status === 200) {
-            try {
-                const suggestions = JSON.parse(this.responseText);
-                displaySuggestions(suggestions);
-            } catch (e) {
-                console.error("Failed to parse JSON:", e);
-                clearSuggestions();
-            }
-        } else {
-            console.error("Request failed with status:", this.status);
-            clearSuggestions();
+// Function to update charts
+let pieChart, barGraph;
+
+function updateCharts() {
+    console.log("Updating charts with data:", sentimentData);
+
+    if (pieChart) pieChart.destroy();
+    if (barGraph) barGraph.destroy();
+
+    pieChart = new Chart(pieChartCtx, {
+        type: 'pie',
+        data: {
+            labels: ['Positive', 'Negative', 'Neutral'],
+            datasets: [{
+                data: [sentimentData.positive, sentimentData.negative, sentimentData.neutral],
+                backgroundColor: ['#36A2EB', '#FF6384', '#FFCE56']
+            }]
         }
-    };
-    xhr.onerror = function() {
-        console.error("Request error.");
-        clearSuggestions();
-    };
-    xhr.send();
-}
+    });
 
-function displaySuggestions(suggestions) {
-    const suggestionsList = document.getElementById('suggestionsList');
-    suggestionsList.innerHTML = '';
-    suggestions.forEach(function(suggestion) {
-        const li = document.createElement('li');
-        li.textContent = suggestion;
-        li.addEventListener('click', function() {
-            document.getElementById('searchInput').value = suggestion;
-            clearSuggestions();
-            fetchProfile(suggestion);
-        });
-        suggestionsList.appendChild(li);
+    barGraph = new Chart(barGraphCtx, {
+        type: 'bar',
+        data: {
+            labels: ['Positive', 'Negative', 'Neutral'],
+            datasets: [{
+                label: '# of Reviews',
+                data: [sentimentData.positive, sentimentData.negative, sentimentData.neutral],
+                backgroundColor: ['#36A2EB', '#FF6384', '#FFCE56']
+            }]
+        }
     });
 }
 
-function clearSuggestions() {
-    document.getElementById('suggestionsList').innerHTML = '';
-}
 
-function fetchProfile(artistName) {
-    const xhr = new XMLHttpRequest();
-    xhr.open('GET', `fetch_profile.php?name=${encodeURIComponent(artistName)}`, true);
-    xhr.onload = function() {
-        if (this.status === 200) {
-            try {
-                const profile = JSON.parse(this.responseText);
-                displayProfile(profile);
-            } catch (e) {
-                console.error("Failed to parse JSON:", e);
-                document.getElementById('artistProfile').innerHTML = '<p>Error: Response is not valid JSON.</p>';
-            }
-        } else {
-            console.error("Request failed with status:", this.status);
-            document.getElementById('artistProfile').innerHTML = '<p>Error: Failed to fetch profile.</p>';
-        }
-    };
-    xhr.onerror = function() {
-        console.error("Request error.");
-        document.getElementById('artistProfile').innerHTML = '<p>Error: Request failed.</p>';
-    };
-    xhr.send();
-}
 
-function displayProfile(profile) {
-    const profileContainer = document.getElementById('artistProfile');
-    if (profile && !profile.error) {
-        profileContainer.innerHTML = `
-            <h2>${profile.Name}</h2>
-            <p><strong>Born:</strong> ${profile.Born}</p>
-            <p><strong>BirthPlace:</strong> ${profile.BirthPlace}</p>
-            <p><strong>Nationality:</strong> ${profile.Nationality}</p>
-            <p><strong>Profession:</strong> ${profile.Profession}</p>
-            <p><strong>Debut Film:</strong> ${profile.DebutFilm}</p>
-            <p><strong>Awards:</strong> ${profile.Awards}</p>
-            <p><strong>Active Years:</strong> ${profile.ActiveYears}</p>
-            <p><strong>Spouse:</strong> ${profile.Spouse}</p>
-            <p><strong>Children:</strong> ${profile.Children}</p>
-            <p><strong>Notable Works:</strong> ${profile.NotableWorks}</p>
-            <p><strong>Education:</strong> ${profile.Education}</p>
-            <p><strong>Height:</strong> ${profile.Height}</p>
-            <p><strong>Weight:</strong> ${profile.Weight}</p>
-            <p><strong>Eye Color:</strong> ${profile.EyeColor}</p>
-            <p><strong>Hair Color:</strong> ${profile.HairColor}</p>
-            <p><strong>Known For:</strong> ${profile.KnownFor}</p>
-            <p><strong>Net Worth:</strong> ${profile.NetWorth}</p>
-            <p><strong>Social Media Handles:</strong> ${profile.SocialMediaHandles}</p>
-            <p><strong>Biography:</strong> ${profile.Biography}</p>
-         
-        `;
-    } else {
-        profileContainer.innerHTML = `<p>${profile.error || 'No profile found.'}</p>`;
+// Function to fetch and update reviews and sentiment data
+async function fetchReviews() {
+    try {
+        const response = await fetch(`http://localhost:5000/api/reviews?imdb_id=${imdbID}`);
+        const reviews = await response.json();
+        console.log("Fetched reviews:", reviews);
+
+        sentimentData = { positive: 0, negative: 0, neutral: 0, reviews: [] }; // Reset sentiment data
+
+        // Clear existing reviews
+        reviewFeed.innerHTML = '';
+
+        // Process reviews and update sentiment data
+        reviews.forEach(review => {
+            const reviewElement = document.createElement('div');
+            reviewElement.className = 'review';
+            reviewElement.innerHTML = `
+                <p>${review.text} (Sentiment: ${review.sentiment})</p>
+                <button class="like-button" data-id="${review.id}">Like</button>
+                <button class="dislike-button" data-id="${review.id}">Dislike</button>
+                <span class="like-count">${review.likes} Likes</span>
+                <span class="dislike-count">${review.dislikes} Dislikes</span>
+            `;
+            reviewFeed.appendChild(reviewElement);
+
+            // Update sentiment counts
+            sentimentData[review.sentiment]++;
+            sentimentData.reviews.push(review);
+        });
+
+        // Update charts only if the data has changed
+        updateCharts();
+    } catch (error) {
+        console.error("Error fetching reviews:", error);
     }
 }
+
+
+// Update review submission
+reviewForm.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const reviewText = reviewInput.value;
+
+    try {
+        await fetch('http://localhost:5000/api/reviews', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ text: reviewText, imdb_id: imdbID }),
+        });
+
+        fetchReviews();
+        reviewInput.value = '';
+    } catch (error) {
+        console.error("Error posting review:", error);
+    }
+});
+
+
+// Like/Dislike functionality
+reviewFeed.addEventListener('click', async (e) => {
+    if (e.target.classList.contains('like-button') || e.target.classList.contains('dislike-button')) {
+        const reviewId = e.target.dataset.id;
+        const action = e.target.classList.contains('like-button') ? 'like' : 'dislike';
+
+        try {
+            await fetch(`http://localhost:5000/api/reviews/${reviewId}/${action}`, { method: 'POST' });
+            fetchReviews(); // Re-fetch reviews after updating like/dislike
+        } catch (error) {
+            console.error(`Error with ${action} action:`, error);
+        }
+    }
+});
+
+// Initial fetch when the page loads
+fetchReviews();
